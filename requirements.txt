@@ -1,0 +1,11 @@
+biopython>=1.87
+pandas>=2.0
+matplotlib>=3.10
+seaborn>=0.13
+numpy>=2.0
+
+# PyRosetta requires a free academic license and must be installed separately:
+#   pip install pyrosetta-installer
+#   python -c "import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()"
+# Register at: https://www.pyrosetta.org/downloads
+# Requires Python 3.11 (not compatible with 3.12+)

@@ -1,0 +1,10 @@
+venv/
+__pycache__/
+*.pyc
+*.log
+*.png
+*.pdf
+*/dms_output/
+.DS_Store
+._*
+.claude/
