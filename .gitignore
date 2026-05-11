@@ -4,7 +4,6 @@ __pycache__/
 *.log
 *.png
 *.pdf
-*/dms_output/
 .DS_Store
 ._*
 .claude/
