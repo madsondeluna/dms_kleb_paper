@@ -1,4 +1,4 @@
-# DMS Klebsiella
+# Deep Mutational Scanning of MgrB, PhoP, PhoQ, PmrA, and PmrB in *Klebsiella pneumoniae* under antimicrobial resistance phenotypes
 
 Instruções para configurar e executar o pipeline de análise computacional em um servidor Linux.
 
@@ -24,12 +24,9 @@ git clone https://github.com/madsondeluna/dms_kleb_paper.git
 cd dms_kleb_paper
 ```
 
-## 3. Registrar e instalar o PyRosetta
+## 3. PyRosetta (sem cadastro)
 
-O PyRosetta exige uma licença acadêmica gratuita.
-
-1. Acesse https://www.pyrosetta.org/downloads e registre-se com e-mail institucional.
-2. Após o registro, o download/instalação é feito automaticamente pelo script abaixo.
+O `pyrosetta-installer` baixa os wheels oficiais sem credenciais. A instalação é feita no próximo passo. Uso comercial requer licença separada (license@uw.edu).
 
 ## 4. Configurar o ambiente (fazer apenas uma vez)
 
@@ -41,8 +38,6 @@ pip install -r requirements.txt
 pip install pyrosetta-installer
 python -c "import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()"
 ```
-
-O último comando vai pedir as credenciais do PyRosetta (usuário e senha cadastrados no site).
 
 ## 5. Executar o pipeline
 
