@@ -46,6 +46,16 @@ O último comando vai pedir as credenciais do PyRosetta (usuário e senha cadast
 
 ## 5. Executar o pipeline
 
+### Mac ou Linux (terminal aberto)
+
+```bash
+conda activate pyrosetta
+cd /caminho/para/dms_kleb_paper
+python scripts/run_dms.py all --no-plot
+```
+
+### Servidor (em segundo plano, sessão pode ser fechada)
+
 ```bash
 source $(conda info --base)/etc/profile.d/conda.sh
 conda activate pyrosetta
