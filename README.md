@@ -1,24 +1,50 @@
 # DMS Klebsiella
 
-Instruções para configurar e executar o pipeline de análise computacional.
+Instruções para configurar e executar o pipeline de análise computacional em um servidor Linux.
 
-## Requisitos
-
-- Linux (Ubuntu recomendado)
-- Conda instalado ([Miniconda](https://docs.conda.io/en/latest/miniconda.html) é suficiente)
-- Licença acadêmica gratuita do PyRosetta (registrar em https://www.pyrosetta.org/downloads antes de instalar)
-
-## Configuração do ambiente (fazer apenas uma vez)
+## 1. Instalar o Miniconda (se ainda não tiver)
 
 ```bash
-conda create -n pyrosetta python=3.10
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+Siga as instruções na tela. Ao final, feche e reabra o terminal (ou rode `source ~/.bashrc`).
+
+Verifique se funcionou:
+
+```bash
+conda --version
+```
+
+## 2. Baixar o repositório
+
+```bash
+git clone https://github.com/madsondeluna/dms_kleb_paper.git
+cd dms_kleb_paper
+```
+
+## 3. Registrar e instalar o PyRosetta
+
+O PyRosetta exige uma licença acadêmica gratuita.
+
+1. Acesse https://www.pyrosetta.org/downloads e registre-se com e-mail institucional.
+2. Após o registro, o download/instalação é feito automaticamente pelo script abaixo.
+
+## 4. Configurar o ambiente (fazer apenas uma vez)
+
+```bash
+source $(conda info --base)/etc/profile.d/conda.sh
+conda create -n pyrosetta python=3.10 -y
 conda activate pyrosetta
 pip install -r requirements.txt
 pip install pyrosetta-installer
 python -c "import pyrosetta_installer; pyrosetta_installer.install_pyrosetta()"
 ```
 
-## Executar
+O último comando vai pedir as credenciais do PyRosetta (usuário e senha cadastrados no site).
+
+## 5. Executar o pipeline
 
 ```bash
 source $(conda info --base)/etc/profile.d/conda.sh
@@ -28,17 +54,19 @@ nohup python scripts/run_dms.py all --no-plot > run.log 2>&1 &
 echo $!
 ```
 
-Substitua `/caminho/para/dms_kleb_paper` pelo caminho real onde a pasta foi descompactada.
+Substitua `/caminho/para/dms_kleb_paper` pelo caminho real onde o repositório foi clonado (use `pwd` para verificar).
 
-O comando roda em segundo plano e registra tudo em `run.log`. O número impresso é o PID do processo.
+O comando roda em segundo plano e grava tudo em `run.log`. O número impresso é o PID do processo.
 
-## Acompanhar o progresso
+## 6. Acompanhar o progresso
+
+Ver o log em tempo real:
 
 ```bash
 tail -f run.log
 ```
 
-Ou verificar quantas posições de cada proteína já foram processadas:
+Ver quantas posições de cada proteína já foram processadas:
 
 ```bash
 watch -n 30 "for p in mgrb phop pmra pmrb phoq; do \
@@ -46,11 +74,11 @@ watch -n 30 "for p in mgrb phop pmra pmrb phoq; do \
   echo \"\$p: \$n\"; done"
 ```
 
-## Tempo estimado
+## 7. Tempo estimado
 
-2 a 6 dias em um servidor moderno. O processo pode ser interrompido e retomado: basta rodar o mesmo comando novamente e ele continua de onde parou.
+2 a 6 dias em um servidor moderno. O processo pode ser interrompido e retomado: ao rodar o mesmo comando novamente, ele continua de onde parou.
 
-## Resultados
+## 8. Resultados
 
 Cada proteína gera um arquivo em `<nome>/dms_output/DMS_report.csv`.
 
